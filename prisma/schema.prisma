@@ -1,0 +1,29 @@
+// Este é o arquivo de configuração do Prisma, define sua fonte de dados e gerador.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Modelagem para a entidade Student (Aluno)
+model Student {
+  id             Int    @id @default(autoincrement())
+  name           String
+  email          String @unique
+  course         String
+  enrollmentYear Int
+}
+
+// Modelagem para a entidade Teacher (Professor)
+model Teacher {
+  id               Int      @id @default(autoincrement())
+  name             String
+  email            String   @unique // E-mail institucional
+  course           String   // Curso vinculado
+  registrationDate DateTime @default(now()) // Data de cadastro no sistema
+  updateDate       DateTime @updatedAt // Data da última atualização
+}
